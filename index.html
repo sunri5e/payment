@@ -24,17 +24,17 @@
                 <div class="field-group pr-105 mt-25">
                     <label for="name" class="field-group__label field-group__label_col-6 field-group__label_mrb-20">
                         <small class="field-group__title">Name</small>
-                        <input type="text" name="name" id="name" autocomplete="off" class="field-group__input">
+                        <input type="text" name="name" id="name" autocomplete="off" class="field-group__input required" data-minlen="3">
                     </label>
 
                     <label for="surname" class="field-group__label field-group__label_col-6 field-group__label_mrb-20">
                         <small class="field-group__title">Surname</small>
-                        <input type="text" name="surname" id="surname" autocomplete="off" class="field-group__input">
+                        <input type="text" name="surname" id="surname" autocomplete="off" class="field-group__input required" data-minlen="3">
                     </label>
 
                     <label for="c_name" class="field-group__label field-group__label_col-12 field-group__label_mrb-20">
                         <small class="field-group__title">Company name</small>
-                        <input type="text" name="c_name" id="c_name" autocomplete="off" class="field-group__input">
+                        <input type="text" name="c_name" id="c_name" autocomplete="off" class="field-group__input required" data-minlen="3">
                         <i class="field-group__input_file-logo" data-target="logo">+ Add logo</i>
                         <input type="file" name="logo" id="logo" class="display-none">
                     </label>
@@ -42,12 +42,12 @@
                     <label for="email"
                            class="field-group__label field-group__label_col-12 field-group__label_mrb-20 icon-mail">
                         <small class="field-group__title">Email</small>
-                        <input type="email" name="email" id="email" autocomplete="off" class="field-group__input">
+                        <input type="email" name="email" id="email" autocomplete="off" class="field-group__input required" data-minlen="3">
                     </label>
 
                     <label for="phone" class="field-group__label field-group__label_col-12">
                         <small class="field-group__title">Phone number</small>
-                        <input type="tel" name="phone" id="phone" autocomplete="off" class="field-group__input">
+                        <input type="tel" name="phone" id="phone" autocomplete="off" class="field-group__input required" data-minlen="3">
                     </label>
                 </div>
 
@@ -58,33 +58,33 @@
                     <label for="country"
                            class="field-group__label field-group__label_col-12 field-group__label_mrb-20 icon-down">
                         <small class="field-group__title">Country</small>
-                        <select name="country" id="country" class="form-block__select">
+                        <select name="country" id="country" class="form-block__select required" data-minlen="1">
                             <option selected class="display-none"></option>
-                            <option value="volvo">Ukraine</option>
-                            <option value="saab">USA</option>
-                            <option value="mercedes">Germany</option>
-                            <option value="audi">Austria</option>
+                            <option value="Ukraine">Ukraine</option>
+                            <option value="USA">USA</option>
+                            <option value="Germany">Germany</option>
+                            <option value="Austria">Austria</option>
                         </select>
                     </label>
 
                     <label for="city" class="field-group__label field-group__label_col-6 field-group__label_mrb-20">
                         <small class="field-group__title">City</small>
-                        <input type="text" name="city" id="city" autocomplete="off" class="field-group__input">
+                        <input type="text" name="city" id="city" autocomplete="off" class="field-group__input required" data-minlen="3">
                     </label>
 
                     <label for="zip" class="field-group__label field-group__label_col-6 field-group__label_mrb-20">
                         <small class="field-group__title">Postal code</small>
-                        <input type="text" name="zip" id="zip" autocomplete="off" class="field-group__input num-only">
+                        <input type="text" name="zip" id="zip" autocomplete="off" class="field-group__input num-only required" data-minlen="3">
                     </label>
 
                     <label for="address" class="field-group__label field-group__label_col-12 field-group__label_mrb-20">
                         <small class="field-group__title">Address</small>
-                        <input type="text" name="address" id="address" autocomplete="off" class="field-group__input">
+                        <input type="text" name="address" id="address" autocomplete="off" class="field-group__input required" data-minlen="3">
                     </label>
 
                     <label for="terms" class="field-group__label field-group__label_col-12">
-                        <input type="checkbox" name="terms" id="terms" autocomplete="off" class="form-block__checkbox">
-                        <small class="field-group__title">I accept Terms and Service</small>
+                        <input type="checkbox" name="terms" id="terms" autocomplete="off" class="form-block__checkbox required" data-minlen="3">
+                        <small class="field-group__title terms">I accept Terms and Service</small>
                     </label>
                 </div>
 
@@ -126,7 +126,7 @@
                     <div class="sbd__details">
                         <div class="sbd__inner shadow rounded">
                             <div class="sbd__methods">
-                                <small class="field-group__title">Payment method</small>
+                                <small class="field-group__title method">Payment method</small>
 
                                 <div class="method-row">
                                     <label for="american" class="method-row__radio method-row__radio_col-3"><input
@@ -157,9 +157,13 @@
                                 <small class="field-group__title">Card details</small>
                                 <div class="details-row shadow rounded">
                                     <div class="field-group">
-                                        <label for="c_num_1"
+                                        <label for="c_num"
                                                class="field-group__label field-group__label_col-12 field-group__label_mrb-20">
                                             <small class="field-group__title">Card number</small>
+                                            <input type="text" name="c_num" id="c_num" autocomplete="off"
+                                                   maxlength="4"
+                                                   class="field-group__input field-group__input_num-cell num-only">
+
                                             <input type="text" name="c_num_1" id="c_num_1" autocomplete="off"
                                                    maxlength="4"
                                                    class="field-group__input field-group__input_num-cell num-only">
@@ -171,23 +175,19 @@
                                             <input type="text" name="c_num_3" id="c_num_3" autocomplete="off"
                                                    maxlength="4"
                                                    class="field-group__input field-group__input_num-cell num-only">
-
-                                            <input type="text" name="c_num_4" id="c_num_4" autocomplete="off"
-                                                   maxlength="4"
-                                                   class="field-group__input field-group__input_num-cell num-only">
                                         </label>
 
                                         <label for="expire"
                                                class="field-group__label field-group__label_col-6 field-group__label_mrb-20">
                                             <small class="field-group__title">Expiration date</small>
                                             <input type="text" name="expire" id="expire" autocomplete="off"
-                                                   placeholder="MM/YY" class="field-group__input required" maxlength="5">
+                                                   placeholder="MM/YY" class="field-group__input required" maxlength="5" data-minlen="5">
                                         </label>
 
                                         <label for="cvv"
                                                class="field-group__label field-group__label_col-3 field-group__label_mrb-20 offset-3">
                                             <small class="field-group__title">CVC/CVV</small>
-                                            <input type="text" name="cvv" id="cvv" autocomplete="off" maxlength="3"
+                                            <input type="text" name="cvv" id="cvv" autocomplete="off" maxlength="3" data-minlen="3"
                                                    class="field-group__input num-only required">
                                         </label>
                                     </div>

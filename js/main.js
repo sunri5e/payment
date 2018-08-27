@@ -27,10 +27,13 @@ $(document).on('submit', '#paymentForm', function (e) {
     $('input[name*=\'c_num\']').each(function () {
         cardNum += $(this).val();
     });
-    inputVals['card_number'] = [
-        {'value': cardNum,
-            'required': true}
-    ];
+
+    cardNum = cardNum.length > 0 ? cardNum: false;
+    inputVals['c_num'] =  {
+        value: cardNum,
+        required: true,
+        len:16,
+        valid : (cardNum !== false && cardNum.length === 16) ? Boolean(1) : Boolean(0)};
 
     var plan;
     $('input[name=\'plan\']').each(function () {
@@ -38,11 +41,11 @@ $(document).on('submit', '#paymentForm', function (e) {
             return plan = $(this).val();
         }
     });
-    inputVals['plan'] = [
-        {'value': plan,
-            'required': true,
-            'text':'Choose plan'}
-    ];
+    inputVals['plan'] = {
+        value: plan,
+        required: false,
+        len:0,
+        valid:true};
 
     var method = '';
     $('input[name=\'method\']').each(function () {
@@ -51,33 +54,54 @@ $(document).on('submit', '#paymentForm', function (e) {
         }
     });
 
-    inputVals['method'] = [
-        {'value': method,
-            'required': true,
-            'text':'Choose pay method'}
-    ];
+    method = method.length > 0 ? method: false;
 
-    $('input:not([type=submit])').each(function () {
+    inputVals['method'] = {
+        value: method,
+        required: true,
+        len:1,
+        valid : (method !== false && method.length > 1) ? Boolean(1) : Boolean(0)};
+
+    $('input:not([type=submit]), select').each(function () {
         if (!$(this).attr('name').match(/(method|plan|c_num)/)) {
-            var valName = $(this).attr('name'),
-                value = $(this).val(),
-                required = $(this).hasClass( "required" ),
-                label = $(this).closest('label'),
-                text = label.find('small').text();
+            var $this = $(this),
+                valName = $this.attr('name'),
+                objValLen = $this.val().length,
+                value = $this.attr('type') === 'checkbox' ? ($this.is(':checked') ? 'off' : 'on') : (objValLen > 0 ? $this.val(): false),
+                required = $this.hasClass( "required" ),
+                label = $this.closest('label'),
+                minLength = $this.attr('data-minlen') || false,
+                valid = !required ? true: (
+                    (minLength && objValLen < minLength) ? Boolean(0) : Boolean(1)
+                );
 
-            inputVals[valName] = [
-                {'value': value,
-                    'required': required,
-                    'text':text}
-            ];
+
+            inputVals[valName] = {
+                value : value,
+                required: required,
+                len:minLength,
+                valid:valid
+            };
         }
     });
 
     console.log(inputVals);
 
-    // for (i in inputVals) {
-    //     console.log(inputVals[i][0]['value']);
-    // }
+    for (i in inputVals) {
+        var label = $('label[for="' + i + '"]');
+        if (inputVals[i]['required'] && inputVals[i]['valid'] === false) {
+            if (i.match(/(method|terms)/)) {
+                $('.'+i).css('color','red');
+            }
+                $('input, select', label).css('border-color','red');
+
+        } else {
+            if (i.match(/(method|terms)/)) {
+                $('.'+i).removeProp( "style" );
+            }
+                $('input, select', label).removeProp( "style" );
+        }
+    }
 
 
 });
