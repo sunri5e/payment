@@ -224,6 +224,7 @@ h1, h2, h3, h4, h5,
     color: rgba(246, 133, 134, 1);
 }
 
+/* Can get same result with Bootstrap classes. Investigate DRY methodology */
 .field-group__label_col-6 {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 50%;
@@ -260,6 +261,7 @@ h1, h2, h3, h4, h5,
     min-height: 1px;
 }
 
+/* You have general classes for indentation. If you already choose approach - use it */
 .field-group__label_mrb-20 {
     margin-bottom: 20px;
 }
@@ -292,6 +294,7 @@ h1, h2, h3, h4, h5,
     position: relative;
 }
 
+/* Avoid using tag selectors */
 .tabs__block span:before,
 .tabs__block span:after {
     position: absolute;
@@ -571,6 +574,7 @@ h1, h2, h3, h4, h5,
 }
 
 @media (max-width: 1200px) {
+    /* indentation class name lose it sense */
     .pr-105 {
         padding-right: 50px;
     }

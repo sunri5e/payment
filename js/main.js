@@ -3,11 +3,11 @@ $(document).on('click', '.field-group__input_file-logo', function () {
     $('#' + target).click();
 });
 
-$(document).on('input', 'input[type=tel], .num-only', function () {
+$(document).on('input', 'input[type=tel], .num-only', function () { // It would be better to use class instead of tag and attr selector
     $(this).val($(this).val().replace(/\D/g, ''));
 });
 
-$(document).on('input', 'input[name=expire]', function () {
+$(document).on('input', 'input[name=expire]', function () { // It would be better to use class instead of tag and attr selector
     var exp = $(this).val().replace(/\D/g, '');
     for (var i = 2; i < exp.length; i = i + 2) {
         exp = [exp.slice(0, i), "/", exp.slice(i)].join('');
@@ -62,7 +62,7 @@ $(document).on('submit', '#paymentForm', function (e) {
         len:1,
         valid : (method !== false && method.length > 1) ? Boolean(1) : Boolean(0)};
 
-    $('input:not([type=submit]), select').each(function () {
+    $('input:not([type=submit]), select').each(function () {  // It would be better to use class instead of tag with :not and attr selector
         if (!$(this).attr('name').match(/(method|plan|c_num)/)) {
             var $this = $(this),
                 valName = $this.attr('name'),
@@ -85,7 +85,7 @@ $(document).on('submit', '#paymentForm', function (e) {
         }
     });
 
-    console.log(inputVals);
+    console.log(inputVals); // Cant see any results
 
     for (i in inputVals) {
         var label = $('label[for="' + i + '"]');
